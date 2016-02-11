@@ -1,0 +1,55 @@
+\section{Data}
+
+\subsection{Data source}
+The data we use derives from the Swedish Labour Force Survey (LFS) during the period 1987-2012 \citep{AKU2012}.\footnote{The survey began already in 1961, but microdata is only availiable from 1987.} During this period the survey samples 17 000-29 500 individuals each period randomly selected from the total Swedish population. Up to 2001 the sample includes all ages 16-64, but from 2001 the age interval was expanded to 15-74. For consistency, we will however confine our sample to ages 16-64.
+
+The survey uses a rotating sample (Figure \ref{tab:rot_panel}). Specifically, a participating individual is interviewed about his or her employment status at a given week every third month during two years. In each month 8 groups of individuals are interviewed. 7 of these 8 groups have been interviewed previously, while 1 group is being interviewed for the first time. Consequently, one group of individuals is rotating out of the sample at each point in time.
+
+Overall, an the surveyed population is divided into the following categories (i) employed, (ii) unemployed or (iii) outside the labour force (Figure \ref{fig:LFS_clas}). The individual is characterised as \textit{employed} if she was working at least one hour during the reference week as (a) self-employed (including helping spouse) (c) on a permanent contract (\textit{tillsvidereanstallning}) or (d) on a time-limited contract. An individual who was absent her work due to illness, leave, vacation, military service, a conflict or similar is also counted as employed. So is an individual in a labor market program, if she receive some enumeration from the employer. The individual is characterised as \textit{unemployed} if she is non-employed, but have been applying for work within the last four weeks and is able to start work in the reference week or during the two following weeks. An individual is also characterised as unemployed if the person is set to start a job within the next 3 months, provided that the individual would be ready start already in the reference week or during the following two weeks. Finally, an individual is characterised as \emph{outside the labor force} if she is not covered by the definitions above. This includes individuals who would and could be able to work, but who did not actively seek jobs (latent unemployment). In 2007 the treatment of students was altered. Up to this point full-time students who also applied for jobs were counted as outside the labour force. But from 2007 these are counted as unemployed. For the age group 16-64, which we confine our sample to, this definition is applied through the entire sample. 
+
+\begin{table}[h]
+	\caption{Illustration of the rotating panel structure}
+	\label{tab:rot_panel}
+	\begin{tabularx}{\linewidth}{cXccccccccc}
+	\toprule[1pt] 
+	 && Group 1 & Group 2 & Group 3 & Group 4 & Group 5 & Group 6  & Group 7 & Group 8 \\ \hline 
+Month 0 && $\mathbf{G_{0}}$ & $G_{-3}$ & $G_{-6}$ & $G_{-9}$ & $G_{-12}$ & $G_{-15}$ & $G_{-18}$ & $G_{-21}$ \\
+Month 1 && $G_{1}$ & $G_{-2}$ & $G_{-5}$ & $G_{-8}$ & $G_{-11}$ & $G_{-14}$ & $G_{-17}$ & $G_{-20}$ \\
+Month 2 && $G_{2}$ & $G_{-1}$ & $G_{-4}$ & $G_{-7}$ & $G_{-10}$ & $G_{-13}$ & $G_{-15}$ & $G_{-19}$ \\ 
+Month 3 && $G_{3}$ & $\mathbf{G_{0}}$ & $G_{-3}$ & $G_{-6}$ & $G_{-9}$ & $G_{-12}$ & $G_{-14}$ & $G_{-18}$ \\
+Month 4 && $G_{4}$ & $G_{1}$ & $G_{-2}$ & $G_{-5}$ & $G_{-8}$ & $G_{-11}$ & $G_{-14}$ & $G_{-17}$ \\  
+Month 5 && $G_{5}$ & $G_{2}$ & $G_{-1}$ & $G_{-4}$ & $G_{-7}$ & $G_{-10}$ & $G_{-13}$ & $G_{-16}$ \\ 
+Month 6 && $G_{6}$ & $G_{2}$ & $\mathbf{G_{0}}$ & $G_{-3}$ & $G_{-6}$ & $G_{-9}$ & $G_{-12}$ & $G_{-16}$ \\ 
+Month 7 && $G_{7}$ & $G_{4}$ & $G_{1}$ & $G_{-2}$ & $G_{-5}$ & $G_{-8}$ & $G_{-11}$ & $Gdv_{-14}$ \\ 
+Month 8 && $G_{8}$ & $G_{5}$ & $G_{2}$ & $G_{-1}$ & $G_{-4}$ & $G_{-7}$ & $G_{-10}$ & $G_{-13}$ \\ 
+Month 9 && $G_{9}$ & $G_{6}$ & $G_{3}$ & $\mathbf{G_{0}}$ & $G_{-3}$ & $G_{-6}$ & $G_{-9}$ & $G_{-12}$ \\ 
+Month 10 && $G_{10}$ & $G_{7}$ & $G_{4}$ & $G_{1}$ & $G_{-2}$ & $G_{-5}$ & $G_{-8}$ & $G_{-11}$ \\ 
+Month 11 && $G_{11}$ & $G_{8}$ & $G_{7}$ & $G_{4}$ & $G_{1}$ & $G_{-2}$ & $G_{-5}$ & $G_{-8}$ \\
+Month 12 && $G_{12}$ & $G_{9}$ & $G_{6}$ & $G_{3}$ & $\mathbf{G_{0}}$ & $G_{-3}$ & $G_{-6}$ & $G_{-9}$ \\  
+	\bottomrule[1pt]
+	\end{tabularx}
+	\begin{minipage}{\linewidth}
+		\footnotesize{Notes: $G_n$ is group of individuals who entered the survey in month $n$. Each group is surveyed with an interval of 3 months. In each month 7/8 of the sample has been surveyed before. 1/8 of the sample is surveyed for the first time.}
+	\end{minipage}
+\end{table}	
+
+\begin{figure}
+	\includegraphics[scale=0.65, trim=2cm 6cm 7cm 4cm, clip]{Figures/population}
+	\caption{Basic classification of population in labor force survey}
+	\label{fig:LFS_clas}
+\end{figure}
+
+\subsection{Labor market stocks and flows in Sweden}
+Figure X shows the development of employment, unemployment and inactivity in Sweden since 1987. The period covers approx. two business cycles as unemployment has a trough and peak in 1990/2001 and 1996/2008, respectively. The overall employment rate is falling approx. 10 percentage points through the period (from 82 to 70 percent), with inactivity rising approx. similarly. The change in the overall employment rate covers diverse changes for permanent and temporary employment, however. While the incidence of permanent employment is down 10 percentage points, the incidence of temporary employment has risen slightly. Consequently, the share of workers on temporary contracts has increased from 20 to 24 percent.
+
+Figure X shows the probabilities of moving between the four groups as hazard rates. From this two overall trends are visible. First, the probability of flowing into permanent and temporary employment has decreased. Second, the probability of flowing from employment into unemployment has increased. There is no clear trend in the hazard rates for movements into inactivity. 
+
+TABLE WITH CYCLIACILITY OF VARIOUIS FLOWS.
+
+\begin{landscape}
+\begin{figure}
+	\includegraphics[scale=0.5, trim=2cm 2cm 0cm 1cm, clip]{../../Programs/Figures/fig_descriptive_states.pdf}
+	\caption{Basic classification of population in labor force survey}
+	\label{fig:LFS_clas}
+\end{figure}
+\end{landscape}

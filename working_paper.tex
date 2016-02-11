@@ -1,0 +1,42 @@
+\documentclass{article}[11pt]
+\linespread{1.5}
+\usepackage{fullpage}
+%\usepackage{amsmath,theorem,amssymb,graphicx, pgfplots, tabularx, placeins}
+\usepackage{amsmath,amssymb, mathtools, natbib, graphicx, placeins, tabularx,booktabs, tikz, pdflscape}
+%\usepackage[semicolon,authoryear]{natbib}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{csquotes}
+
+
+\title{Swedish Labour Market Flows}
+
+\author{
+  Hannes Malmberg \footnote{IIES. hannes.malmberg@iies.su.se}\\
+  \and
+  Niels-Jakob Harbo Hansen\footnote{IIES. mail: nielsjakobharbo.hansen@iies.su.se}\\
+}
+\date{\parbox{\linewidth}{\centering%
+  \today \endgraf\bigskip
+  {\Large \textbf{Preliminary and incomplete - please do not cite}}\endgraf}}
+
+\begin{document}
+
+\maketitle 
+%\input{./tex/abstract.tex}
+\newpage
+\input{./tex/introduction.tex}
+\newpage
+\input{./tex/literature.tex}
+\newpage
+\input{./tex/method.tex}
+\newpage
+\input{./tex/data.tex}
+\FloatBarrier
+\newpage
+\input{./tex/conclusion.tex}
+\newpage
+\bibliographystyle{apalike}
+\bibliography{./bibtex/bibtex}
+
+\end{document}

@@ -1,0 +1,28 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.4)  28 JUL 2015 16:08
+entering extended mode
+**C:/Users/hama5111/Dropbox/Forskning/Labour*market*flows*(1)/writing/Working*P
+aper/tex/method.tex
+
+("C:/Users/hama5111/Dropbox/Forskning/Labour market flows (1)/writing/Working P
+aper/tex/method.tex"
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 68 languages loaded.
+! Undefined control sequence.
+l.1 \section
+            {Method}
+? 
+! Emergency stop.
+l.1 \section
+            {Method}
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 7 strings out of 493706
+ 340 string characters out of 3145381
+ 52139 words of memory out of 3000000
+ 3427 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 5i,0n,1p,116b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
