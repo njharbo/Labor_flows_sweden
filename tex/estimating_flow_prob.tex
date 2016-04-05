@@ -1,0 +1,58 @@
+\section{Estimating flow matrices}
+\label{sec:est_flow_matrices}
+
+One challenge is to transform the observed transition rates to instantaneous flow matrices. In the method section in Section \ref{sec:method} we worked with instantaneous flow matrices. However, in the Swedish data (Section \ref{sec:data}) interviews are only repeated every three month, why we only observe the 3 month transition rates between labor market states. In this section we discuss how to use the observed transition rates from Section \ref{sec:data} to identify the actual and trend transition matrices, $Q(t)$ and $\tilde{Q}(t)$, used in Section \ref{sec:method}.
+
+\subsubsection{Actual flow matrix}
+
+We start by noting the relationship between the observed transition matrix and the underlying instantaneous flow matrix, where the time unit is one month.
+\begin{align}
+P(t,t+3)=\exp \left( \int_{t}^{t+3} Q(u) du \right) \label{eq:flow_trans}
+\end{align}
+That is, the observed transition matrix between period $t$ and $t+3$ is a function of the continuum of instantaneous flow matrices during the time interval. This also implies that the \emph{time-aggregation} issue is relevant in our data: a person might be in a different state during the time interval than the states she/he is observed in at the two end-points. This means that the observed transition matrix can be a function of many different paths of flow matrices.
+
+To identify a flow matrix from an observed transition matrix we will assume that transition rates are constant between two measurements. Specifically, we will assume that flow matrix is constant during the interval $(t,t+3)$. This allows us to identify $Q(t)$ from \eqref{eq:flow_trans}
+\begin{align}
+	P(t-3,t)&=\exp \left( 3 Q(t) \right) \\
+	\Rightarrow Q(t)&=\frac{\log_m P(t-3,t)}{3}
+\end{align}
+where $\log_m$ is the matrix logaritm. This data transformation will address the time-aggregation issue. By jointly identifying all flow rates, we avoid the problem pointed out by \cite{Shimer2012}: lower inflows to some states will \emph{per se} lead to higher observed outflow rates in the transition matrix, as the higher duration makes it more likely to observe an outflow in the transition matrix. In the computation of the flow matrix we take account of this problem, but the solution comes at the unappealing cost of assuming constant flow rates over each quarter. TBD: Finding a better solution is work in progress.
+
+The resulting flow rates are presented in Figure \ref{fig:hazard_rates}, which are described above in Section \ref{sec:data}.
+
+\subsubsection{Trend flow matrix}
+We then identify the trend flow matrix $\bar{Q}(t)$ element by element using the full time sequence of $Q(t)$. Specifically, we identify $\bar{Q}(t)_{ij, i \neq j}$ by applying a HP filter with $\lambda=500.000$ to the corresponding time-series $\left\{ {Q}(s)_{ij} \right\}_{s=t_{0}}^T$. The diagonal elements, $\bar{Q}(t)_{ii}$, are computed as residuals such that each row in $\bar{Q}(t)$ sums to 0. The resulting trend flow rates are depicted in Figure \ref{fig:trend_hazard_rates}.
+
+\begin{landscape}
+\begin{figure}
+\centering
+	\includegraphics[scale=0.8, trim=2cm 2cm 0cm 1cm, clip]{../../Programs/Figures/fig_trend_hazard_rates.pdf}
+	\caption{Trend hazard rates for transition across labour market states}
+	\label{fig:trend_hazard_rates}
+\end{figure}
+\end{landscape}
+
+
+%In this section we show how one can use the monthly Swedish labor market survey data to estimate the flow matrices $Q(t)$ and the trend flow matrix $\tilde{Q}(t)$. Throughout the section, one unit of time will be one month, and $t=1$ will be the start of the data set which is June 1987 [?]. We write $T=xx$ for the last month of surveying which is March 2011 (the full data set runs from January 1987 to September 2011 but we exclude five months in the beginning and six months at the end to be able to use a moving average to avoid seasonal fluctuations). 
+%
+%As explained in the data section, there is a survey done every month. However, each individual in the survey is only surveyed at three month intervals. The resampling of individuals means that we can estimate transition probability matrices, but the three month intervals mean that we can only obtain the transition matrix $P(t-3,t)$ and not $P(t-1,t)$. 
+%
+%The key equation to estimate the flow matrices $Q(t)$ is:
+%\[
+%P(t-3,t) = \exp\left(\int_{t-3}^{t} Q(z)dz\right),
+%\]
+%where $\exp$ denotes the matrix exponential.
+%
+%$Q$ is modelled as a continuous function of time. To be able to estimate it with a finite number of observations of $P(t,t+3)$ we assume that $Q(t)$ is constant within months, and write $Q_t$ for the value that $Q(t)$ takes between $t-1$ and $t$.
+%
+%
+%With this assumption, we obtain the following system of equations
+%\begin{equation}
+	%\label{estimation}
+	%\log(P(t-3,t)) = Q_{t-2}+Q_{t-1}+Q_{t}, \quad\quad t = 1,\dots, T	
+%\end{equation}
+%where $\log$ denote the matrix logarithm. With this formulation, we need to solve for $T$ unknowns ($Q_1$ through $Q_T$) with $T-2$ equations. We ensure identification by assuming that $Q_{-2}=Q_{-1}=Q_0$. 
+
+
+
+

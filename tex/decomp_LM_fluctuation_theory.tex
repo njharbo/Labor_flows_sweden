@@ -1,0 +1,115 @@
+\section{Method}
+\label{sec:method}
+
+In this section we discuss two methods for decomposing the business cycle variability in all labor market states into business cycle variability in the labor market flows. The first assumes that actual labor market states can be well approximated by their steady state levels. That is, the levels where outflows equals inflow for each labor state given the observed labor market flows. This method can approximate changes in the actual labor market distribution well if the flows are high and convergence to steady state thus fast. However, the method risks leading to misguided results if flows across states, and consequently the convergence rate, are low. This motivates the second method, which does not rely on the steady state assumption. The generality comes at the cost of slightly more complicate algebra, but as we will show below the simplifying steady state assumption is far from innocent. Indeed, in Sweden the estimated contributions are much affected when one one accounts properly for the out of steady state dynamics. The two methods only differ in steady state assumption. In other dimensions we will formulate the models in as general terms as possible. Specifically, we will let time be continuous and allow for an arbitrary number of labor market states.
+
+This way, we make two methodological contributions to the literature. First, we extend both the steady state and non steady state method by \cite{Shimer2012} and \cite{Elsby2013} to account for an arbitrary number of labor market states. Second, we show that a high $R^2$ between the actual and steady state level is an insufficient statistics to argue for appropriateness of the steady state method. These might seem as technical points, but we show failing to account for non steady state dynamics will lead to a large underestimation (overestimation) of the contribution from flows involving temporary (permanent) employment to unemployment variability. This casts results in the existing literature on dual labor markets \cite{Silva2013, Hairault2015} in doubt.
+
+This sub-section continues as follows. First, we introduce the necessary notation for Markov chains in continous time. Second, we describe how the labor market distribution over $N$ states at time $t$ can be approximated via a function that takes all contemporaneous flow rates as input and delivers the associated steady state as output. Third, we describe how the labor market distribution at time $t$ can be written as a function of all past flow-rates and an initial condition. Fourth, we then show how both methods can be used to derive an expression for the business cycle deviation of all labor market states as a function of the business cycle deviation of all flow rates. Finally, we show how these resulting linear expressions can be used to conduct a statistical variance decomposition of the business variance in unemployment into contributions from all flow rates.
+
+\subsection{Markov chains in continous time}
+
+In both methods we will model the transition between labor market states by means of Markov chains in continous time.\footnote{For a mathematical exposure of Markov chains in continuous time we refer to \cite{Norris1997}}
+\begin{itemize}
+	\item $x(t)$: a $1 \times N$ row matrix, which contains the distribution of persons across $N$ labor market states at time $t$.
+	\item $Q(t)$: a $N \times N$ matrix containing the instantaneous flow rates between all $N$ states. That is, $Q(t)_{i,j}$ is the rate in the Poisson proces that governs the transition between state $i$ and $j$ at time $t$. Moreover, we define $Q(t)_{j,j} \equiv -\sum_{i \neq j} Q(t)_{j,i} $ such that each row sums to 0. 
+	\item $\hat{Q}(t)$:  a $N \times N$ matrix containing the trend instantaneous flow rates between all $N$ states. As in the instantenous flow matrix we define $\hat{Q}(t)_{j,j} \equiv -\sum_{i \neq j} Q(t)_{j,i} $
+\end{itemize}
+
+This way, the evolution in the labor market distribution is written as
+\begin{align}
+\mathbf{x}(t+\tau)=\mathbf{x}(t) \exp \left( \int_{t}^{t+\tau} Q(u) du \right)
+\end{align}
+
+\subsection{Steady state method}
+\label{sec:method_st_st}
+
+We will now discuss how to approximate the the labor market distribution, $x(t)$, by means of the steady state associated with the contemporaneous flow rates. This will allow us to write the distribution as a function of flow-rates, and thus facility the later decomposition in section TBD. 
+
+Now let $\mathbf{\bar{x}}(t)$ denote the steady state distribution associated with the flow matrix $Q(t)$. This can be as the (left-)eigenvector to $Q(t)$ associated with the eigenvalue of zero.\footnote{See \cite{Norris1997}, page 117}. That is $\mathbf{\bar{x}}(t)$ has to satisfy \eqref{eq:left_eigen_1}-\eqref{eq:left_eigen_2}.
+\begin{align}
+\mathbf {\bar{x}}(t) Q(t)=0 \label{eq:left_eigen_1} \\
+\sum_s{\mathbf {\bar x}}_s(t) = 1 \label{eq:left_eigen_2}
+\end{align} 
+This way we can define a function $\sigma$ that takes $Q(t)$ as input and returns the corresponding $\mathbf{\bar{x}}(t)$ that satisfies \eqref{eq:left_eigen_1}-\eqref{eq:left_eigen_2}. Consequently, we can write the steady state approximation to the actual and trend labor market distribution as 
+\begin{align}
+\mathbf {\bar{x}}(t) &= \sigma \left( Q(t) \right) \label{eq:stst_x} \\
+\mathbf {\tilde{x}}(t) &= \sigma \left( \hat{Q}(t) \right) \label{eq:stst_x_trend} 
+\end{align}
+
+\subsubsection{Speed of convergence}
+\label{sec:method_st_st_conv_speed}
+
+Using [TBD] the distribution in period $t$ can then be written as below, where $c_t^i$ are scalars and $v_t^i$ are the eigen-vectors to the transition matrix $Q(t)$.
+\begin{align}
+x(t-1)=\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i v_t^i \label{eq:eigen_dyn}
+\end{align}
+%Noting that $x(t)=x(t-1) P(t)=x(t-1) \exp(Q(t))$ 
+We can then write 
+\begin{align}
+%x(t)&=x(t-1) \exp(Q(t)) \\
+%x(t)&= \left(\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i v_t^i \right)\exp(Q(t)) \nonumber \\
+%x(t)&=\bar{x}\left(  Q(t) \right) \exp(Q(t))+\sum_{j=2}^S q_t^i v_t^i \exp(Q(t)) \nonumber \\
+%x(t)&=\bar{x}\left(  Q(t) \right) \exp(0)+\sum_{j=2}^S q_t^i v_t^i \exp(Q(t)) \nonumber \\
+x(t)&=\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i \exp(\lambda_{it}) v_t^i \label{eq:dynamics}
+\end{align}
+%In the second line we rely on \eqref{eq:eigen_dyn}, in the third we expand the parenthesis and in forth we use \eqref{eq:left_eigen_1} and the fact that the eigen-value to the steady state distribution equals 0. Finally, in the fifth line we use \eqref{eq:left_eigen_1} and that $\lambda_{it}$ is the eigen-value to the eigen-vector $v_t^i$. 
+
+Using \eqref{eq:dynamics} we can also analyze the speed of convergence towards steady state. Indeed, using \eqref{eq:dynamics} and the fact that $x(t+h)=x(t)\exp(hQ(t))$ we get that 
+\begin{align}
+%x(t+h)&=\bar{x} \exp \left( h Q(t) \right)+\sum_{j=2}^S q_t^i \exp(h\lambda_{it}) v_t^i \\
+x(t+h)&=\bar{x} (Q(t)) \exp (h0) +\sum_{j=2}^S q_t^i \exp(h\lambda_{it}) v_t^i
+\end{align}
+Since we know from [TBD] that 
+\begin{align}
+\lambda_s<\lambda_{s-1}<\dots<\lambda_{1}=0
+\end{align}
+then $x(t+h)$ will converge to $\bar{x} (Q(t))$ as $h \rightarrow \infty$, and the speed of the this convergence will be determined by the value of the second largest eigenvalue $\lambda_2$. That means, that the appropriateness of $\bar{x}(Q(t))$ as an approximation to $x(t)$ will be determined by the value of $\lambda_2$. We will use this point below.
+
+
+\subsection{Non steady state method}
+\label{sec:method_non_st_st}
+
+The approach discussed above (Section \ref{sec:method_st_st}) relies on the steady state being a relevant approximation for the actual state of the labor market. However, as we find a half-life of deviations from steady state of 2 years this assumption seems unwarranted in our data.
+
+For this reason, we will also discuss an alternative approach that does not rely the steady state assumption.  Specifically, we will use that the actual and trend distribution can be written as a function of an initial condition along with the history of actual and trend transition matrices, respectively. 
+\begin{align}
+	\mathbf{x}(t)=\mathbf{x}(t_0) \exp{\int_{u=0}^{t-1} Q(u) du} \label{eq:non_stst_x} \\
+	\mathbf{\hat{x}}(t)=\mathbf{x}(t_0) \exp{\int_{u=0}^{t-1} \hat Q(u) du} \label{eq:non_stst_x_trend}
+\end{align}
+Here \eqref{eq:non_stst_x} denotes the actual labor market distribution as a function of an initial distribution and the full history of flow-matrices, while \eqref{eq:non_stst_x_trend} writes a trend distribution $(\mathbf{\hat{x}}(t))$ as a function of the same initial condition and the full history of \emph{trend} flow matrices.
+
+\subsection{Business Cycle Fluctuations as Function of Flow Rates}
+%Having shown how the current labor market distribution can be written as function of current and past flow rates, 
+We will now discuss how to express the deviation from trend in the labor market distribution as a linear function of contributions from all flow rate. 
+
+We first consider the decomposition of the steady state $\mathbf{\bar{x}}(t)$. To get an expression for the business cycle variation as a function of all flow rates we do a first order Taylor expansion of the steady state approximation to each state of the distribution at time $t$ from \eqref{eq:stst_x} to the corresponding state of the steady state approximation to the trend distribution from \eqref{eq:stst_x_trend}. We initially log both expressions in order to get expressions for percentage deviations from trend.
+\begin{align}
+		\log \left( \mathbf{\bar{x}}(t) \right)_s -\log \left(\mathbf{ \tilde{x}}(t) \right)_s &\approx 
+		\sum_{i,j, i\neq j} \frac{\partial \sigma(Q(t))_s}{\partial Q(t)_{i,j}} \frac{\hat{Q}(t)_{i,j}}{\sigma(\hat Q(t))_s} 
+		 \left( \log Q_{i,j} (t)-\log \hat{Q}_{i,j} (t) \right) \label{eq:BC_fluc_stst}
+\end{align}
+The expression in \eqref{eq:BC_fluc_stst} tells us that the percentage deviation from trend of a labor market state is a equal to the sum of all deviations of (non-diagonal) flows rates from their trend weighted by the elasticity of the relevant labor market state with respect to the flow rate.
+
+Next we consider the decomposition of the non-steady state expression of the labor market distribution $\mathbf{\bar{x}}(t)$. Like above we do a first order Taylor expansion of the expression for the actual distribution at time $t$ \eqref{eq:non_stst_x} around the expression for the trend distribution \eqref{eq:non_stst_x_trend}. This yields an expression for the deviation of each labor market state as a function of all flow rates.
+\begin{align}
+	\log \left( \mathbf{x}(t) \right)_s  -\log \left( \mathbf{\hat{x}}(t) \right)_s &\approx  
+	\int_{u=t_0}^{s}\sum_{i,j\neq i} \frac{\partial  x(t)_s}{\partial Q(u)_{ij}} \frac{\hat{Q}(u)_{ij}}{ \hat{x}(t)_s}\left( \log Q_{ij}(u) - \log \hat{Q}_{ij}(u) \right) du \label{eq:BC_fluc_non_stst}
+\end{align}
+In \eqref{eq:BC_fluc_non_stst} the percentage deviation of each labor market state from trend is also a function of the percentage deviation of each flow rate weighted by the elasticity of the labor market state with respect to the flow rate. However, in contrast to the expression in \eqref{eq:BC_fluc_stst}, which relies on the steady state assumption, the expression in \eqref{eq:BC_fluc_non_stst} relies on the \emph{entire path} of deviations in flow rates. This is because distribution under the non steady state method cannot be assumed only to be influenced by the contemporanous flow rates. Instead the state today is a function of the complete historical path of flow rates.
+
+\subsection{Decomposition of Business Cycle Variations}
+
+We now wish to decompose the observed business cycle variation in the labor market distribution into contributions from all flow rates. Given the linear expressions for deviations from trend as function of flow rates in \eqref{eq:BC_fluc_stst}-\eqref{eq:BC_fluc_non_stst}, we can do a statistical variance decomposition. Specifically, we can use the expressions in \ref{eq:BC_fluc_stst} and \ref{eq:BC_fluc_non_stst} to find an expression for $\beta_{i,j,s}$ which is the contribution of the flow from state $i$ to state $j$ to the business cycle variation of state $s$. 
+
+Using the steady state decomposition from the steady state method in \eqref{eq:BC_fluc_stst} as well as the non steady state method from \eqref{eq:BC_fluc_non_stst} the expressions for $\beta_{i,j,s}$ become, respectively.
+\begin{align}
+\beta_{i,j,s}^{st. st.}&=\frac{Cov \left( \log \mathbf{\bar{x}}(t)_s -\log \mathbf{\tilde{x}}(t)_s, \frac{\partial \sigma(Q(t))_s}{\partial Q(t)_{i,j}} \frac{\hat{Q}(t)_{i,j}}{\sigma(\hat{Q}(t))_s} \left( \log Q_{i,j}(t)-\log \hat{Q}_{i,j}(t)  \right) \right)}{Var \left( \log \mathbf{\bar{x}}(t)_s -\log \mathbf{\tilde{x}}(t)_s \right)} 
+\label{eq:beta_stst}
+\\
+\beta_{i,j,s}^{non. st. st.}&=\frac{Cov \left(  \log \mathbf{x}(t) _s  -\log \mathbf{\hat{x}}(t)_s , \int_{u=t_0}^{s} \frac{\partial  x(u)_s}{\partial Q(u)_{i,j}} \frac{Q(u)_{i,j}}{ x(u)_s}\left( \log Q_{i,j}(t) - \log \hat{Q}_{i,j}(t)  \right) du\right)}{Var \left(\log \mathbf{x}(t) _s  -\log \mathbf{\hat{x}}(t)_s \right)}
+\label{eq:beta_nonstst}
+\end{align}
+
+
+

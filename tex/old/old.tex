@@ -1,0 +1,121 @@
+
+
+
+
+all flow
+
+the steady state decomposition method in continuous time and with $N$ states. Second, we 
+
+
+ However, the method risks leading to misguided results if flows, and consequently convergence rate, is low. This issue is likely to be much more important in a European context than in the US, due to lower labor market flows in Europe \cite{Elsby2013}. 
+
+derives from \cite{Shimer2012} a
+
+We will now apply the framework formulated above to decompose the fluctuations in shares on the labor market. 
+
+Lets assume that workers can be in $S \ in R$ mutually excluding states on the labor market. The distribution of workers between the $N$ states is captured in the $N \times 1$ vector $x(t)$. A given worker moves between these $N$ states according to the flow matrix $Q(t)$, which is an $S \times S$ matrix. The elements in this matrix contains the instantaneous flow probabilities between the $N$ different states. Specifically, $Q(t)_{N1, N2}$ is the rate in the Poisson process that governs the transition from state $N_1$ to $N_2$. %Each row of $Q(t)$ will sum to zero.
+
+In the data we do however not observe the instantaneous flow probability between the different labor market states. Instead, we observe the probability of moving between states between two discrete points in time $(t,t')$ 
+\begin{align}
+P(t,t')_{N_1, N_2}=P\left( x(t')=N_2 | x(t)=N_1 \right)
+\end{align}
+By relying on the result from [TBD: Source] we can however translate the instantaneous flow probability matrix, $Q(t)$, to the discrete time probability matrix $P(t,t')$ via the following transformation
+\begin{align}
+P(t,t')=\exp \left( \int_{t}^{t'} Q(z) dz \right)
+\end{align}
+In section TBD below we discuss how to identify $Q(t)$.
+
+\subsection{Computing the steady state distribution}
+
+Let $\bar{x}(Q(t))$ be the steady state distribution of $Q(t)$. That is, the distribution associated with the instantaneous flow matrix, where the in- and outflow between the $S$ states exactly offset each other. This steady state distribution is found as the left-eigenvector with eigenvalue zero to the transition-matrix $Q(t)$. That is, $\bar{x}(Q(t))$ is the row vector $X_L$ with a corresponding $\lambda_L=0$ that satisfies the condition below
+\begin{align}
+X_L A=\lambda_L X_L \label{eq:left_eigen}
+\end{align}
+
+Relying on [TBD: INSERT REFERENCE TO THM] the distribution in period $t$ can then be written as below, where $c_t^i$ are scalars and $v_t^i$ are the eigen-vectors to the transition matrix $Q(t)$.
+\begin{align}
+x(t-1)=\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i v_t^i \label{eq:eigen_dyn}
+\end{align}
+Noting that $x(t)=x(t-1) P(t)=x(t-1) \exp(Q(t))$ we can then write 
+\begin{align}
+%x(t)&=x(t-1) \exp(Q(t)) \\
+x(t)&= \left(\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i v_t^i \right)\exp(Q(t)) \nonumber \\
+x(t)&=\bar{x}\left(  Q(t) \right) \exp(Q(t))+\sum_{j=2}^S q_t^i v_t^i \exp(Q(t)) \nonumber \\
+x(t)&=\bar{x}\left(  Q(t) \right) \exp(0)+\sum_{j=2}^S q_t^i v_t^i \exp(Q(t)) \nonumber \\
+x(t)&=\bar{x} \left(  Q(t) \right)+\sum_{j=2}^S q_t^i \exp(\lambda_{it}) v_t^i \label{eq:dynamics}
+\end{align}
+In the second line we rely on \eqref{eq:eigen_dyn}, in the third we expand the parenthesis and in forth we use \eqref{eq:left_eigen} and the fact that the eigen-value to the steady state distribution equals 0. Finally, in the fifth line we use \eqref{eq:left_eigen} and that $\lambda_{it}$ is the eigen-value to the eigen-vector $v_t^i$. 
+
+Using \eqref{eq:dynamics} we can also analyze the speed of convergence towards steady state. Indeed, using \eqref{eq:dynamics} and the fact that $x(t+h)=x(t)\exp(hQ(t))$ we get that 
+\begin{align}
+%x(t+h)&=\bar{x} \exp \left( h Q(t) \right)+\sum_{j=2}^S q_t^i \exp(h\lambda_{it}) v_t^i \\
+x(t+h)&=\bar{x} (Q(t)) \exp (h0) +\sum_{j=2}^S q_t^i \exp(h\lambda_{it}) v_t^i
+\end{align}
+Since we know from [TBD: source] that 
+\begin{align}
+\lambda_s<\lambda_{s-1}<\dots<\lambda_{1}=0
+\end{align}
+then $x(t+h)$ will converge to $\bar{x} (Q(t))$ as $h \rightarrow \infty$, and the speed of the this convergence will be determined by the value of the second largest eigenvalue $\lambda_2$. That means, that the appropriateness of $\bar{x}(Q(t))$ as an approximation to $x(t)$ will be determined by the value of $\lambda_2$. We will use this point below.
+
+\subsection{Decomposing fluctuation in the steady state distribution}
+
+We now define $f$ as a function that maps instantenous flow matrices into the associated steady state distribution
+\begin{align}
+f: Q(t) \in \Re^s \times \Re^s \rightarrow x \in \Re^s_+  \\
+\text{Such that } Q(t)x=0 \nonumber
+\end{align}
+This way $f(Q(t))$ gives us a sequence of steady states associated with the sequence of instantaneous flow matrices. 
+
+We now wish to decompose the fluctuations in the steady state distribution into contributions from each of the $(S-1) \times (S)$ independent flow rates.\footnote{As each row in $Q(t)$ is constrained to sum to zero, the diagonal of $Q(t)$ will be a linear function of the $S-1$ other element in that row.} To this end we define a trend flow matrix denoted $\hat{Q}(t)$, and the decompose the log of $f(Q(t))$ using a first order Taylor expansion evaluated at $\bar{Q}(t)$ in order to achieve a decomposition of the percentage deviation of $f(Q(t))$ from $f(\bar{Q}(t))$.
+\begin{align}
+\log f(Q(t)) \approx \log f(\bar{Q}(t))+\sum_{j}\sum_{i \neq j} \frac{\partial f(Q(t))}{\partial Q(t)_{i,j}} \frac{1}{f(Q(t))} \frac{Q(t)_{i,j}-\bar{Q}(t)_{i,j}}{\bar{Q}(t)_{i,j}} \bar{Q}(t)_{i,j} \nonumber \\
+\Rightarrow \log f(Q(t)) -\log f(\bar{Q}(t)) \approx \sum_{j} \sum_{i \neq j} \frac{\partial f(Q(t))}{\partial Q(t)_{i,j}} \frac{\bar{Q}(t)_{i,j}}{f(Q(t))} \left( \log Q_{i,j}-\log \bar{Q}_{i,j} \right)
+\end{align}
+Using this linear expression for the percentage deviation of the steady state distribution from the trend steady state, we can then do a traditional variance decomposition of the variation in deviations from steady state. Specifically, $\beta{i,j}$ denotes the variance contribution from the flow rate going from state $i$ to state $j$.
+\begin{align}
+\beta_{i,j}=\frac{Cov \left( \log f(Q(t)) -\log f(\bar{Q}(t)), \frac{\partial f(Q(t))}{\partial Q(t)_{i,j}} \frac{\bar{Q}(t)_{i,j}}{f(Q(t))} \left( \log Q_{i,j}-\log \bar{Q}_{i,j}  \right) \right)}{Var \left( \log f(Q(t)) -\log f(\bar{Q}(t)) \right)}
+\end{align}
+
+\subsection{Decomposition fluctuation in the actual distribution}
+
+As mentioned above the appropriateness of the steady state distribution as approximation to the actual distributions depends on the speed of convergence towards the steady state. In the case of slow convergence, the decomposition relying on the steady state will not be appropriate. Below we will thus develop a strategy that does not rely on the steady state.
+
+First define the trend flow matrix and distribution. $\hat{Q}(t)$ is the trend flow matrix, and $\hat{x}(t)$ is the trend distribution such that
+\begin{align}
+\hat{x}(t)=x(0) \exp \left( \sum_{s=0}^{t-1} \hat{Q}(s) \right)
+\end{align}
+In addition the actual distribution is given by 
+\begin{align}
+x(t)=x(0) \exp \left( \sum_{s=0}^{t-1} {Q}(s) \right)
+\end{align}
+
+We can use this to do a first order Taylor expansion of $x(t)$ around the trend $\hat{x}(t)$. Specifically, we do a first order Taylor expansion of $\log \left( x(t) \right)$ around $\log \left( \hat{x}(t) \right)$. 
+\begin{align}
+	\log \left( x(t) \right) &\approx \log \left( \hat{x}(t) \right)+ \sum_{s=0}^{s=t} \sum_{j} \sum_{i \neq j} \frac{\partial \log x(s)}{\partial x(s)} \frac{\partial x(s)}{\partial Q_{ij}(s)}
+	\left(Q_{ij}(s)-\hat{Q}_{ij}(s)\right) \nonumber \\
+	&= \log \left( \hat{x}(t) \right)+\sum_{s=0}^{s=t}\sum_{j} \sum_{i \neq j}\frac{\partial \log x(s)}{\partial x(s)} \frac{\partial x(s)}{\partial Q_{ij}(s)}
+	\frac{\left(Q_{ij}(s)-\hat{Q}_{ij}(s)\right)}{\hat{Q}_{ij}(s)}\hat{Q}_{ij}(s) \nonumber \\
+	&= \log \left( \hat{x}(t) \right)+\sum_{s=0}^{s=t}\sum_{j} \sum_{i \neq j}\frac{\partial \log x(s)}{\partial x(s)} \frac{\partial x(s)}{\partial Q_{ij}(s)}Q_{ij}(s)
+\left( \log Q_{ij}(s) - \log \hat{Q}_{ij}(s)  \right) 
+\end{align}
+Using this linearised expression for the deviation between the actual and trend labor market distribution we can then decompose the variation. Let $\beta_{i,j}$ denote the variation contribution from the flow rate from state $j$ to $i$. Then, 
+\begin{align}
+	\beta_{ij}=\frac{Cov \left( \log \left( x(t) \right) -\log \left( \hat{x}(t) \right),\sum_{s=0}^{s=t} \frac{\partial \log x(s)}{\partial x(s)} \frac{\partial x(s)}{\partial Q_{ij}(s)}
+\left( \log Q_{ij}(s) - \log \hat{Q}_{ij}(s)  \right) \right)}{Var \left( \log \left( x(t) \right) -\log \left( \hat{x}(t) \right) \right)}
+\end{align}
+ in the actual distribution of
+%We will now turn to the question on how to decompose the fluctuations in the observed distribution of workers across labor market states, $x(t)$, into fluctuations stemming from each of the $N \times N$ flow rates. In doing so, there are two way to proceed. One is to assume that distribution of workers can be approximated by the the steady state level of distribution, and use the expression for this steady state level to conduct the decomposition. The other is decompose the actual distribution, rather than the steady state level. Below we will consider both in turn. 
+
+%\subsection{Decomposition using the steady state expression}
+%Each transition matrix, $Q(t)$, will be associated will a steady state distribution $\bar{x}(t)$. Following [TBD] this distribution can be found as the eigenvector to $\bar{x}(t)$ corresponding to the eigenvalue with real value of $0$. Doing this for all $t$ we achieve a time serie of 
+
+%We want to analyse the deviation of distribution from trend, $x(t)-\bar{x}_t$. To de Now let $f(t)$ be the sequence of steady states
+
+%decompose the e. The other is to assume that 
+%The question we will turn to now is how to decompose fluctuations in the observed distribution 
+%But we can translate the instantenous flow probability $Q(t)$ to the discrete time
+
+%In reality we do however not observe the observe the flow matrix 
+
+%Using this flow matrix we can write the probability 
+

@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\begin{document}
+
+\section{Background on Continuous Time Markov Chain}
+In the main text, we noted that labor market flows were regulated by a Continuos Time Markov Chain (CTMC) with flow matrix $\Lambda(t)$. We noted that this means that shares in different labor market states evolved according to 
+\[
+x(t) = x(0)P(0,t)
+\]
+where the transition matrix $P(0,t)$ is given by 
+\[
+P(0,t) = \exp\left(\int_0^t Q(z)dz\right).
+\]
+
+In this section, we will show how one can start from individuals whose labor market flows are governed by a CTMC, and build up to the aggregate behavior of shares as a function of the underlying CTMC.
+\subsection{Definition of a CTMC}
+\label{sec:ctmc_definition}
+We want to analyze a CTMC $X$ on states $\cal{S}=\{1,\dots,S\}$ with the generating flow matrix $\Lambda(t)$. The flow matrix $\Lambda(t)$ has non-negative off-diagonal element, and the diagonal elements ensure that the row-sums are zero:
+\[
+\Lambda(t)_{s,s} = -\sum_{s'\neq s} Q(t)_{s,s'}.
+\] 
+
+In this case, $X$ is defined as a stochastic process where 
+\begin{equation}
+\label{ctmc_definition}
+	Pr((t+h)=s' | X(t) = s) = \delta_{s,s'}+\lambda(t)_{s,s'}h+o(h),
+\end{equation}
+
+where $\delta_{s,s'}$ is the Kronecker delta which satisfies
+\[
+\delta_{s,s'} = \left\{ \begin{array}{cc}
+	1 & \mbox{if $s=s'$} \\
+	0 & \mbox{if $s\neq s'$},
+\end{array}\right.
+\]
+and where $o(h)$ means a term of smaller magnitude than $h$.
+
+Equation \eqref{ctmc_definition} states that when the CTMC is in state $s$, there is a probability $h \Lambda(t)_{s,s'}$ that the process will jump to state $s'\neq s$. This means that $\Lambda(t)_{s,s'}$ gives the rate at which the process jumps from state $s$ to state $s'$. 
+
+Given the formulation of the diagonal ensuring that each row sum to $0$, we get that the probability that the process stays in $s$ is approximately
+\[
+Pr(X(t+h)=s | X(t) = s) = 1-\sum_{s'\neq s} h\lambda_{s,s'}(t).
+\]
+
+\subsection{Alternative interpretation of defintion}
+Another way of interpreting the definition of a CTMC is that the process being in state $s$ flows to state $s'\neq s$ with a Poisson rate $Q(t)_{s,s'}$. This relates to an equivalent definition of the CTMC $X$defined by $Q(t)$. This definition states that $X$ is a stochastic process that waits in state $s$ for a time $\tau_s(t)$ which is distributed as
+\[
+P(\tau_s(t) \ge w)=\exp\left(-\int_{t}^{t+w} \sum_{s'\neq s} \lambda_{s,s'}(t)dz\right),
+\]
+and that conditioned on jumping, the process jumps to $s'$ with probability $\frac{\lambda_{s,s'}(t)}{\sum_{s''\neq s} \lambda_{s,s''}(t)}$ conditioned on jumping at time $t$.
+
+The expression above looks complicated, but is easier if $\Lambda(t)$ is constant $\Lambda$. In that case, the waiting time in state $s$ is exponentially distributed with rate $\sum_{s'\neq s} \lambda_{s,s'}$.
+
+The definition can also be shown to be equivalent to the definition in Section \ref{sec:ctmc_definition}.
+
+\subsection{Transition probabilities in Markov chains}
+The definition in Section \ref{sec:ctmc_definition} is quite abstract, but it is possible to use it to formulate useful results. The most important is that the transition matrix defined by the equation
+\[
+P_{s,s'}(t,t+u)=Pr(X(t+u) = s' | X(t)=s)
+\]
+satisfies the equation
+\[
+P(t,t+u) = \exp\left(\int_{t}^{t+u} Q(z)dz\right)
+\]
+for any $t,u\ge 0$. This equation is useful as it allows us to use the flow matrix $\Lambda(t)$ to derive all transition matrix for any pair of time periods.
+
+\subsection{Evolution of shares and a Law of Large Numbers}
+In labor market research, we are interested in the evolution of the share of agents in different states when agents are governed by a CTMC. It will turn out that this follows an intuitive pattern: the vector with expected share of workers in a particular share evolve according to the transition matrix $P(0,t)$ of the underlying CTMC.
+
+To show this more formally, we consider a model with $N$ workers $\{1,\dots,N\}$ which all have their movement between labor market states governed by a CTMC with flow matrix $\Lambda(t)$. We write $X_i(t)$ for the CTMC associated with individual $i$, where $X_i(0)=s_{i,0}$ is given.
+
+We are interested in the expected share of workers in a particular state $s$ at time $t$:
+\[
+x_s(t)=\mathbb{E}\left(\frac{\sum_{i=1}^n \mathbb{I}(X_i(t)=s)}{N}\right),
+\]
+where $\mathbb{I}$ is an indicator function. Using that the expected value of an indicator function of an event is the probability of the event, we obtain
+\[
+x_s(t)=\frac{\sum_{i=1}^n Pr(X_i(t)=s)}{N}.
+\]
+In the next step, we decompose this expression depending on the initial value of the process $X_i(t)$. Here, we use that $P(X_i(t)=s)=P(X(t)=s|X(0)=s_{i,0})$ where $X(t)$ is an arbitrary CTMC with flow matrix $\Lambda(t)$. Writing $N_{s_{0}}$ for the number of individuals which start in $s_0$, we obtain:
+\begin{eqnarray*}
+	x_s(t) &=& \frac{\sum_{i=1}^n \mathbb{P}(X_{i}(t) = s)}{N}\\
+	&=& \frac{\sum_{i=1}^n \mathbb{P}(X(t) = s | X(0)=s_{i,0})}{N}\\
+	&=& \frac{\sum_{i=1}^n P(0,t)_{s_{0,i},s}}{N}\\
+	&=& \sum_{s_0 \in \cal S}  \left(\frac{N_{s_0}}{N}\right)P(0,t)_{s_{0},s}\\
+	&=& \sum_{s_0 \in \cal S} x_{s_0}(0) P(0,t)_{s_{0,i},s}\\
+	&=& \left(x(0)P(0,t)\right)_s.
+\end{eqnarray*}
+In the second to last step, we use that $\frac{N_{s_0}}{N}=x_{s_0}(0)$. This expression shows that the vector of expected shares evolve according to the equation
+\[
+x(t)=x(0)P(0,t)
+\]
+as expected.
+
+\subsection{The law of large numbers and aggregate behavior}
+If we let $N(t)$ be vector giving the number of workers in state $s$ at time $t$, we approximately have that
+\[
+N(t) \sim Multinom(N, x(t)).
+\]
+It is well known (Elements of Distribution Theory, Severini) that this can be approximated by 
+\[
+\frac{N(t)}{N} \sim Normal(x(t), \Sigma)
+\]
+with
+\[
+\Sigma_{i,j} = \left\{\begin{array}{cc}
+	\frac{x_i(t)}{N} & \mbox{ if $i=j$}\\
+	-\frac{x_i(t)x_j(t)}{N} & \mbox{ if $i\neq j$} 
+\end{array}\right.
+\]
+This means that the share vector has very small variance if $N$ is sufficiently large. In our dataset, $N\approx 20,000$ and we will assume that the observed share equals the expected share $x(t)$.
+
+\subsection{Steady state in a CTMC Markov chain}
+If we have a CTMC $X$ with a finite number of states and constant flow matrix $\Lambda$ that is \emph{irreducible} (which means that every state can be reached from every other state), there exists a steady state distribution $\pi$ such that
+\[
+\lim_{t\to\infty} \mathbb{P}(X(t)=s' | X(0)=s) = \pi_{s'}
+\]
+for all $s,s'$. This means that regardless of the initial state, the Markov chain converges to the distribution $\pi$. This $\pi$ is the unique solution to the equation
+\[
+\pi'\Lambda=0
+\]
+which satisfies $\sum_{s} \pi_s =1$.
+
+When we have an inhomogenous CTMC with varying flow matrix $\Lambda(t)$, we can analogously define the steady state vector $\pi(t)$ associated with $\Lambda(t)$ as the solution to
+\[
+\pi(t)'\Lambda(t)=0
+\]
+with $\sum_s \pi_s(t)=1$. Again, this solution will exist and be unique when $\tilde{\Lambda}=\Lambda(t)$ is the flow matrix of a finite irreducible CTMC.
+
+
+
+\end{document}

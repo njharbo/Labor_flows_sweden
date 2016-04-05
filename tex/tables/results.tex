@@ -1,0 +1,34 @@
+\begin{table}[h]
+\caption{\label{tab:decomp} Decomposition of the variance in unemployment, 1987-2012}
+\begin{tabularx} {1\textwidth} { l l X cXcXcXcX|c} \\ \hline
+\multicolumn{11}{c}{\textbf{A. Non steady state method}} \\ \hline
+
+ \multicolumn{2}{l}{ \backslashbox{From}{To}}            & & PE   & & TE    & & U     & & I     & & $\sum$\\\hline
+
+\input{../../programs/decompose/matlab/tables/decomp_nonss.tex} 
+\hline
+
+\multicolumn{12}{c}{\textbf{B. Steady state method}}\\\hline
+
+ \multicolumn{2}{l}{ \backslashbox{From}{To}}     & & PE   & & TE    & & U     & & I     & & $\sum$\\\hline
+
+\input{../../programs/decompose/matlab/tables/decomp_ss.tex}
+\hline
+
+\multicolumn{12}{c}{\textbf{C. Difference (panel B. - panel A.) }}\\\hline
+
+\multicolumn{2}{l}{ \backslashbox{From}{To}}    &  & PE   & & TE    & & U     & & I     & & $\sum$\\\hline
+
+\input{../../programs/decompose/matlab/tables/decomp_dif.tex}
+\hline\hline
+
+\multicolumn{12}{l}{\footnotesize \emph{Notes:} Panel A and B are computed using \eqref{eq:beta_nonstst} and \eqref{eq:beta_stst}, respectively. PE: Permanent employment. TE: Temporary }\\
+
+\multicolumn{12}{l}{\footnotesize employment. U: Unemployment. I: Inactivity. The total variation has been normalized to the contribution from}\\
+
+\multicolumn{12}{l}{\footnotesize  flows from/to these 4 states.}\\
+
+\multicolumn{12}{l}{\footnotesize \emph{Source:} Own calculations on data from Statistics Sweden}\\
+\end{tabularx}
+
+\end{table}
